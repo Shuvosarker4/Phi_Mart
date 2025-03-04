@@ -2,6 +2,6 @@ from product import views
 from django.urls import path
 
 urlpatterns = [
-    path('',views.view_category,name='category-list'),
-    path('<int:pk>/',views.view_specific_category,name='view-specific-category')
+    path('',views.ViewCategory.as_view(),name='category-list'),
+    path('<int:pk>/',views.ViewSpecificCategory.as_view(),name='view-specific-category')
 ]
