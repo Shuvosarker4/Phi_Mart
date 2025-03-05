@@ -8,10 +8,15 @@ from product.models import Category,Product
 #     description = serializers.CharField()
 
 class CategorySerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Category
-        fields = ['id','name','description']
-    # product_count = serializers.IntegerField()
+        fields = ['id','name','description','product_count']
+
+    product_count = serializers.IntegerField(read_only = True)
+
+    def get_product_count(self, obj):
+        return Product.objects.filter(category=obj).count()
 
     
 # class ProductSerializer(serializers.Serializer):
