@@ -8,6 +8,8 @@ from product.models import Product,Category,Review
 from product.serializers import ProductSerializer,CategorySerializer,ReviewSerializer
 from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIView
 from rest_framework.viewsets import ModelViewSet
+from django_filters.rest_framework import DjangoFilterBackend
+from product.filters import ProductFilter
 
 # Create your views here.
 
@@ -16,6 +18,8 @@ from rest_framework.viewsets import ModelViewSet
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = ProductFilter
 
 class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.annotate(product_count = Count('products')).all()
