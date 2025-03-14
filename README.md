@@ -172,6 +172,18 @@ To deploy the application, follow these steps:
    python manage.py runserver
    ```
 
+## Environment Variables
+
+Create a `.env` file in the root directory and add the following:
+
+```ini
+SECRET_KEY=your_secret_key
+DEBUG=True
+DATABASE_URL=your_database_url
+ALLOWED_HOSTS=*
+EMIL_HOST=your_email_host
+```
+
 ## Troubleshooting
 
 - **Issue**: Unable to connect to the database.
