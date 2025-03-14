@@ -1,12 +1,8 @@
 from rest_framework import serializers
 from decimal import Decimal
-from product.models import Category,Product,Review
+from product.models import Category,Product,Review,ProductImage
 from django.contrib.auth import get_user_model
 
-# class CategorySerializer(serializers.Serializer):
-#     id = serializers.IntegerField()
-#     name = serializers.CharField()
-#     description = serializers.CharField()
 
 class CategorySerializer(serializers.ModelSerializer):
     
@@ -19,32 +15,16 @@ class CategorySerializer(serializers.ModelSerializer):
     def get_product_count(self, obj):
         return Product.objects.filter(category=obj).count()
 
-    
-# class ProductSerializer(serializers.Serializer):
-#     id = serializers.IntegerField()
-#     name = serializers.CharField()
-#     unit_price = serializers.DecimalField(max_digits=10, decimal_places=2,source='price')
-#     price_with_tax = serializers.SerializerMethodField(method_name='calculate_tax')
-
-    # category = CategorySerializer()
-    # category = serializers.PrimaryKeyRelatedField(
-    #     queryset = Category.objects.all()
-    # )
-
-    # category = serializers.StringRelatedField() 
-
-    # category = serializers.HyperlinkedRelatedField(
-    #     queryset = Category.objects.all(),
-    #     view_name = 'view-specific-category'
-    # )
-
-    # def calculate_tax(self,product):
-    #     return round(product.price * Decimal(1.1),2)
+class ProductImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductImage
+        fields = ['id','image']
 
 class ProductSerializer(serializers.ModelSerializer):
+    images = ProductImageSerializer(many=True,read_only = True)
     class Meta:
         model = Product
-        fields = ['id','name','description','price','stock','category']
+        fields = ['id','name','description','price','stock','category','images']
 
     category = serializers.PrimaryKeyRelatedField(
         queryset = Category.objects.all()
@@ -74,4 +54,4 @@ class ReviewSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         product_id = self.context['product_id']
         return Review.objects.create(product_id=product_id,**validated_data)
-    
+
