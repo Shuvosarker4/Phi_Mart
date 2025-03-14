@@ -6,7 +6,9 @@ PhiMart is an e-commerce platform built with Django and Django REST Framework. T
 
 ```
 db.sqlite3
+LICENSE
 manage.py
+README.md
 requirements.txt
 .vscode/
     settings.json
@@ -22,7 +24,7 @@ api/
     __pycache__/
     migrations/
 fixtures/
-    product_data.json
+    data.json
 media/
     products/
 order/
@@ -36,13 +38,13 @@ order/
     views.py
     __pycache__/
     migrations/
-phi_venv/
+phi_env/
     pyvenv.cfg
     Include/
     Lib/
     Scripts/
     share/
-phiMart/
+phi_mart/
     __init__.py
     asgi.py
     settings.py
@@ -86,8 +88,8 @@ users/
 2. Create and activate a virtual environment:
 
    ```sh
-   python -m venv phi_venv
-   source phi_venv/bin/activate  # On Windows use `phi_env\Scripts\activate`
+   python -m venv phi_env
+   source phi_env/bin/activate  # On Windows use `phi_env\Scripts\activate`
    ```
 
 3. Install the dependencies:
