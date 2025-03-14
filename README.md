@@ -10,8 +10,6 @@ LICENSE
 manage.py
 README.md
 requirements.txt
-.vscode/
-    settings.json
 api/
     __init__.py
     admin.py
